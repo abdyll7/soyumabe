@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <title>Bir Sözüm Var</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #1e1e2f, #3b3b58);
+      color: white;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .question, .audios { display: none; }
+    button {
+      margin: 8px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #ff4f81;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    button:hover { background: #ff2e68; }
+    audio { margin: 15px 0; }
+  </style>
+</head>
+<body>
+  <div class="start">
+    <h2>Bir dənə sual verim bilsən səsə gedəssən</h2>
+    <p>Amil şitdik eləmə tez ol deyirsənsə, <button onclick="showAudios()">Bura bas pramoy səsə keçsin</button></p>
+    <button onclick="showQuestion()">Cavab vermək istəyirəm</button>
+  </div>
+
+  <div class="question">
+    <h2>Sual: Müşfiqin yoldaşının adı nədi</h2>
+    <button onclick="checkAnswer(true)">Gültəkin</button>
+    <button onclick="checkAnswer(false)">Gülyetər</button>
+    <button onclick="checkAnswer(false)">Güləndam</button>
+    <button onclick="checkAnswer(false)">Yağmur</button>
+  </div>
+
+  <div class="audios">
+    <h2>Səs yazılarım 🎧</h2>
+    <p>O boyda 2x 1.5x zad da düzəltmişəm işlədərsən.</p>
+
+    <div>
+      <audio id="audio1" controls src="ses1.mp3"></audio><br>
+      <button onclick="changeSpeed('audio1',1)">1x</button>
+      <button onclick="changeSpeed('audio1',1.5)">1.5x</button>
+      <button onclick="changeSpeed('audio1',2)">2x</button>
+    </div>
+
+    <div>
+      <audio id="audio2" controls src="ses2.mp3"></audio><br>
+      <button onclick="changeSpeed('audio2',1)">1x</button>
+      <button onclick="changeSpeed('audio2',1.5)">1.5x</button>
+      <button onclick="changeSpeed('audio2',2)">2x</button>
+    </div>
+
+    <div>
+      <audio id="audio3" controls src="ses3.mp3"></audio><br>
+      <button onclick="changeSpeed('audio3',1)">1x</button>
+      <button onclick="changeSpeed('audio3',1.5)">1.5x</button>
+      <button onclick="changeSpeed('audio3',2)">2x</button>
+    </div>
+  </div>
+
+  <script>
+    function showQuestion() {
+      document.querySelector(".start").style.display = "none";
+      document.querySelector(".question").style.display = "block";
+    }
+    function checkAnswer(correct) {
+      if (correct) {
+        document.querySelector(".question").style.display = "none";
+        document.querySelector(".audios").style.display = "block";
+      } else {
+        alert("Səhvdi");
+      }
+    }
+    function showAudios() {
+      document.querySelector(".start").style.display = "none";
+      document.querySelector(".audios").style.display = "block";
+    }
+    function changeSpeed(id, speed) {
+      document.getElementById(id).playbackRate = speed;
+    }
+  </script>
+</body>
+</html>
