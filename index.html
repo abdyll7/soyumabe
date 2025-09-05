@@ -1,98 +1,151 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <title>Bir Sözüm Var</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(135deg, #1e1e2f, #3b3b58);
-      color: white;
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .question, .audios { display: none; }
-    button {
-      margin: 8px;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      background: #ff4f81;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-      transition: 0.3s;
-    }
-    button:hover { background: #ff2e68; }
-    audio { margin: 15px 0; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>saol girdin</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Pacifico', cursive;
+    background: linear-gradient(135deg, #ffe6f0, #ffb3d9);
+    color: #330033;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    text-align: center;
+    padding-top: 50px;
+  }
+  h1 { font-size: 32px; margin-bottom: 20px; }
+  h2 { font-size: 24px; margin: 15px 0; }
+  p { font-size: 18px; margin: 10px 0; }
+  button {
+    margin: 10px;
+    padding: 14px 24px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: #ff66aa;
+    color: white;
+    box-shadow: 0 5px 0 #cc527a;
+  }
+  button:hover { background: #ff3385; transform: translateY(-2px); }
+  .hidden { display: none; }
+
+  /* Audio section */
+  .audios {
+    margin-top: 30px;
+  }
+  audio {
+    width: 90%;
+    max-width: 280px;
+    margin: 10px 0;
+  }
+  .audio-controls button {
+    margin: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background: #ff99cc;
+    color: #330033;
+    border-radius: 8px;
+    box-shadow: 0 3px 0 #cc66aa;
+  }
+  .audio-controls button:hover { background: #ff66aa; transform: translateY(-1px); }
+
+  /* Cartoon flame animation */
+  .flame {
+    width: 50px;
+    height: 50px;
+    background: url('https://i.ibb.co/6m8Z5Wk/flame-cartoon.png') no-repeat center;
+    background-size: contain;
+    animation: flicker 1s infinite;
+    margin: 10px auto;
+  }
+  @keyframes flicker {
+    0% { transform: translateY(0px) scale(1); opacity:1; }
+    50% { transform: translateY(-3px) scale(1.1); opacity:0.8; }
+    100% { transform: translateY(0px) scale(1); opacity:1; }
+  }
+</style>
 </head>
 <body>
-  <div class="start">
-    <h2>Bir dənə sual verim bilsən səsə gedəssən</h2>
-    <p>Amil şitdik eləmə tez ol deyirsənsə, <button onclick="showAudios()">Bura bas pramoy səsə keçsin</button></p>
-    <button onclick="showQuestion()">Cavab vermək istəyirəm</button>
-  </div>
 
-  <div class="question">
-    <h2>Sual: Müşfiqin yoldaşının adı nədi</h2>
-    <button onclick="checkAnswer(true)">Gültəkin</button>
-    <button onclick="checkAnswer(false)">Gülyetər</button>
-    <button onclick="checkAnswer(false)">Güləndam</button>
-    <button onclick="checkAnswer(false)">Yağmur</button>
-  </div>
+<div class="start">
+  <h1>Girdiyin üçün sağol Türkan elə bütün gün boş boş fikirləşməkdən baş gedirdi deyə dedim başımı qatım həm də səhvi bu mən gözəl insan eləmişəm deyə bir üzrüm olsun sağol bloka atmısan deyə orda istiyə bilmədim hə yəni gözlənti zad yoxdu kef elə nəbilim deyərsən uşaq neyniyib zad onsuz səsdə demişəm lazım olanı.Həm dedim bir az vaxtıvı yeyim heç nə olmaz</h1>
+  <p>Hə indi mən səs yazmışam 3 dənə bilirsən o səsə keçmək üçün bir dənə sual verəcəm düz bilsən keçirsən</p>
+  <button onclick="showQuestion()">Camaat dərd çəkir mən burda gic gic şeylər eliyirəm nəysə buna bassan sual görünəcək</button>
+  <button onclick="showAudios()">Amil şitdik eləmə tez ol deyirsənsə buna bas pramoy səsə keçsin</button>
+</div>
 
-  <div class="audios">
-    <h2>Səs yazılarım 🎧</h2>
-    <p>O boyda 2x 1.5x zad da düzəltmişəm işlədərsən.</p>
+<div class="question hidden">
+  <h2>Müşfiqin yoldaşının adı</h2>
+  <button onclick="checkAnswer(true)">Gültəkin</button>
+  <button onclick="checkAnswer(false)">Yağmur</button>
+  <button onclick="checkAnswer(false)">Gülbətin</button>
+  <button onclick="checkAnswer(false)">Gülyetər</button>
+  <p>Yadıva düşmürsə üstdən pramoy səsə keçə bilirsən</p>
+</div>
 
-    <div>
-      <audio id="audio1" controls src="ses1.mp3"></audio><br>
+<div class="audios hidden">
+  <h2>Şairin son sözləri.Həqiqi fso bu son dəfədi səni narahat eliyirəm qurtardı bir də görsənmiyəcəm ona görə son dəfə deyim gedim sən də səsə qulaq as istəsən.Sevirəm səni kadın</h2>
+  <div class="flame"></div>
+  <p>O boyda 2x 1.5x zad düzəltmişəm istəsən işlədərsən</p>
+
+  <div>
+    <audio id="audio1" controls src="ses1.mp3"></audio>
+    <div class="audio-controls">
       <button onclick="changeSpeed('audio1',1)">1x</button>
       <button onclick="changeSpeed('audio1',1.5)">1.5x</button>
       <button onclick="changeSpeed('audio1',2)">2x</button>
     </div>
+  </div>
 
-    <div>
-      <audio id="audio2" controls src="ses2.mp3"></audio><br>
+  <div>
+    <audio id="audio2" controls src="ses2.mp3"></audio>
+    <div class="audio-controls">
       <button onclick="changeSpeed('audio2',1)">1x</button>
       <button onclick="changeSpeed('audio2',1.5)">1.5x</button>
       <button onclick="changeSpeed('audio2',2)">2x</button>
     </div>
+  </div>
 
-    <div>
-      <audio id="audio3" controls src="ses3.mp3"></audio><br>
+  <div>
+    <audio id="audio3" controls src="ses3.mp3"></audio>
+    <div class="audio-controls">
       <button onclick="changeSpeed('audio3',1)">1x</button>
       <button onclick="changeSpeed('audio3',1.5)">1.5x</button>
       <button onclick="changeSpeed('audio3',2)">2x</button>
     </div>
   </div>
+</div>
 
-  <script>
-    function showQuestion() {
-      document.querySelector(".start").style.display = "none";
-      document.querySelector(".question").style.display = "block";
-    }
-    function checkAnswer(correct) {
-      if (correct) {
-        document.querySelector(".question").style.display = "none";
-        document.querySelector(".audios").style.display = "block";
-      } else {
-        alert("Səhvdi");
-      }
-    }
-    function showAudios() {
-      document.querySelector(".start").style.display = "none";
-      document.querySelector(".audios").style.display = "block";
-    }
-    function changeSpeed(id, speed) {
-      document.getElementById(id).playbackRate = speed;
-    }
-  </script>
+<script>
+function showQuestion() {
+  document.querySelector(".start").classList.add("hidden");
+  document.querySelector(".question").classList.remove("hidden");
+}
+function checkAnswer(correct) {
+  if(correct){
+    document.querySelector(".question").classList.add("hidden");
+    document.querySelector(".audios").classList.remove("hidden");
+  } else {
+    alert("Yox");
+  }
+}
+function showAudios() {
+  document.querySelector(".start").classList.add("hidden");
+  document.querySelector(".audios").classList.remove("hidden");
+}
+function changeSpeed(id, speed) {
+  document.getElementById(id).playbackRate = speed;
+}
+</script>
+
 </body>
 </html>
